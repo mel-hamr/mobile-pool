@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 
@@ -15,6 +16,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   String mathOperation = '';
   String result = '';
+  final ScrollController _opertaionScrollController = ScrollController();
 
   final calcButtons = [
     '7',
@@ -40,6 +42,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -57,8 +60,12 @@ class _MainAppState extends State<MainApp> {
             Expanded(
                 child: Column(
               children: [
-                myText(screenSize, mathOperation),
-                myText(screenSize, result),
+                operationText(
+                    screenSize, mathOperation, _opertaionScrollController),
+                resultText(
+                  screenSize,
+                  result,
+                ),
               ],
             )),
             Expanded(
@@ -117,7 +124,7 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
-  Widget myText(screenSize, valueue) {
+  Widget operationText(screenSize, valueue, scrollController) {
     return Container(
       width: screenSize.width,
       height: screenSize.height / 10,
@@ -125,6 +132,7 @@ class _MainAppState extends State<MainApp> {
       alignment: Alignment.bottomRight,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
+        controller: scrollController,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -137,9 +145,37 @@ class _MainAppState extends State<MainApp> {
                         : 22,
                 fontWeight: FontWeight.bold,
               ),
+              softWrap: true,
+              overflow: TextOverflow.visible,
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget resultText(
+    screenSize,
+    valueue,
+  ) {
+    return Container(
+      width: screenSize.width,
+      height: screenSize.height / 10,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      alignment: Alignment.bottomRight,
+      child: AutoSizeText(
+        result,
+        style: TextStyle(
+          fontSize: (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? 52
+              : 22,
+          fontWeight: FontWeight.bold,
+        ),
+        maxLines: 1,
+        maxFontSize: 52,
+        minFontSize:
+            10, // Minimum font size to prevent the text from becoming too small
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -199,6 +235,12 @@ class _MainAppState extends State<MainApp> {
     }
     setState(() {
       mathOperation += value;
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_opertaionScrollController.hasClients) {
+        _opertaionScrollController
+            .jumpTo(_opertaionScrollController.position.maxScrollExtent);
+      }
     });
   }
 
