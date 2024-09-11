@@ -206,7 +206,17 @@ class _MainAppState extends State<MainApp> {
   }
 
   pressButton(value) {
-    if (value == '=') {
+    if ((value == '*' ||
+            value == '/' ||
+            value == '=' ||
+            value == 'C' ||
+            value == 'AC') &&
+        mathOperation.isEmpty) {
+      return;
+    }
+    if (value == '=' && mathOperation.isNotEmpty) {
+      if (mathOperation.length == 1 && isOperationSign(mathOperation[0]))
+        return;
       if (isOperationSign(mathOperation[mathOperation.length - 1])) {
         setState(() {
           mathOperation = mathOperation.substring(0, mathOperation.length - 1);
@@ -215,7 +225,7 @@ class _MainAppState extends State<MainApp> {
       calculate();
       return;
     }
-    if (value == 'C') {
+    if (value == 'C' && mathOperation.isNotEmpty) {
       setState(() {
         mathOperation = mathOperation.substring(0, mathOperation.length - 1);
       });
