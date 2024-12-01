@@ -29,7 +29,7 @@ class _MainAppState extends State<MainApp> {
     '1',
     '2',
     '3',
-    'x',
+    '*',
     '/',
     '0',
     '.',
@@ -63,11 +63,9 @@ class _MainAppState extends State<MainApp> {
             Expanded(
                 flex: 2,
                 child: Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade100,
-                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: createGrid(screenSize))),
           ],
@@ -138,7 +136,7 @@ class _MainAppState extends State<MainApp> {
     if (value == 'AC' || value == 'C') {
       return const Color.fromRGBO(54, 140, 206, 1);
     }
-    if (value == 'x' ||
+    if (value == '*' ||
         value == '-' ||
         value == '/' ||
         value == '=' ||
@@ -149,7 +147,7 @@ class _MainAppState extends State<MainApp> {
   }
 
   Color textColor(value) {
-    if (value == 'x' ||
+    if (value == '*' ||
         value == '-' ||
         value == '/' ||
         value == '=' ||

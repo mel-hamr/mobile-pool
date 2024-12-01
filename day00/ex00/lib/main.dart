@@ -39,12 +39,14 @@ class MainApp extends StatelessWidget {
                 height: 20,
               ),
               TextButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all<Color>(Colors.blue.shade600),
-                      padding: WidgetStateProperty.all<EdgeInsetsDirectional>(
-                          const EdgeInsetsDirectional.symmetric(
-                              vertical: 10, horizontal: 25))),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.black54,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 25),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () {
                     print("Button pressed");
                   },

@@ -71,8 +71,7 @@ class _MainAppState extends State<MainApp> {
             Expanded(
                 flex: 2,
                 child: Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade100,
                       borderRadius: BorderRadius.circular(10),
