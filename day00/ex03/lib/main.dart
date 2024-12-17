@@ -172,8 +172,7 @@ class _MainAppState extends State<MainApp> {
         ),
         maxLines: 1,
         maxFontSize: 52,
-        minFontSize:
-            10, // Minimum font size to prevent the text from becoming too small
+        minFontSize: 10,
         overflow: TextOverflow.ellipsis,
       ),
     );
