@@ -60,11 +60,9 @@ class _MainAppState extends State<MainApp> {
             Expanded(
                 child: Column(
               children: [
-                operationText(
-                    screenSize, mathOperation, _opertaionScrollController),
+                operationText(screenSize, _opertaionScrollController),
                 resultText(
                   screenSize,
-                  result,
                 ),
               ],
             )),
@@ -123,7 +121,7 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
-  Widget operationText(screenSize, valueue, scrollController) {
+  Widget operationText(screenSize, scrollController) {
     return Container(
       width: screenSize.width,
       height: screenSize.height / 10,
@@ -133,10 +131,9 @@ class _MainAppState extends State<MainApp> {
         scrollDirection: Axis.horizontal,
         controller: scrollController,
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              valueue,
+              mathOperation,
               style: TextStyle(
                 fontSize:
                     (MediaQuery.of(context).orientation == Orientation.portrait)
@@ -144,8 +141,6 @@ class _MainAppState extends State<MainApp> {
                         : 22,
                 fontWeight: FontWeight.bold,
               ),
-              softWrap: true,
-              overflow: TextOverflow.visible,
             ),
           ],
         ),
@@ -155,7 +150,6 @@ class _MainAppState extends State<MainApp> {
 
   Widget resultText(
     screenSize,
-    valueue,
   ) {
     return Container(
       width: screenSize.width,
